@@ -2,11 +2,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    
     <meta charset="utf-8">
     <title>TechSolutions : nos services</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <?php
+require_once 'inc/infos.php';
+
+$requete = $bdd->query("SELECT * FROM utilisateurs");
+$utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <nav>
     <ul class="menu">
@@ -21,7 +28,6 @@
     <h1>Nos services</h1>
     <p>Des solutions informatiques adaptées à votre entreprise.</p>
 </header>
-
 <main>
     <section class="services">
         <h2>Nos prestations</h2>
@@ -59,11 +65,19 @@
         </table>
     </section>
 </main>
-
-<footer class="pied-page">
-    <p>TechSolutions - 12 rue des Innovateurs, 19100 Brive-la-Gaillarde</p>
-    <p>05 55 88 77 66 - contact@techsolutions.fr</p>
-</footer>
+<p><u>Nos techniciens</u></p>
+ <ul>
+    <?php foreach ($utilisateurs as $u) { ?>
+        <?php if ($u["service"] == "Technique") { ?>
+            <li>
+                <?php echo $u["prenom"]; ?>
+                <?php echo $u["nom"]; ?>
+                , <?php echo $u["service"]; ?>
+            </li>
+        <?php } ?>
+    <?php } ?>
+</ul>
+<?php include "inc/pied.php"; ?>
 
 </body>
 </html>

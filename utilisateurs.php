@@ -3,8 +3,10 @@
 include "inc/infos.php";
 require "inc/bdd.php";
 
-$requete = $pdo->query("SELECT prenom, nom, service, role FROM utilisateurs ORDER BY nom");
+$requete = $pdo->query("SELECT prenom, nom, service, role FROM utilisateurs WHERE role != 'admin' ORDER BY nom");
 $utilisateurs = $requete->fetchAll();
+$requete_admin = $pdo->query("SELECT prenom FROM utilisateurs WHERE role = 'admin' ORDER BY nom");
+$utilisateurs_admin = $requete_admin->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,6 +36,7 @@ $utilisateurs = $requete->fetchAll();
       <p class="section-surtitre">ADMINISTRATION</p>
       <h2 class="titre-apropos">Gestion des utilisateurs</h2>
       <p>Nombre de comptes : <?php echo count($utilisateurs); ?></p>
+      <p>dont <?php echo count($utilisateurs_admin); ?> administrateur(s)</p>
       <table>
       <tr>
         <th>Prénom</th>
@@ -68,7 +71,7 @@ $utilisateurs = $requete->fetchAll();
             <th style="padding:12px;">Rôle</th>
           </tr>
         </thead>
-        <tbody>
+        <body>
           <?php foreach ($utilisateurs as $utilisateur) { ?>
           <tr>
             <td style="padding:12px;">
@@ -85,44 +88,13 @@ $utilisateurs = $requete->fetchAll();
             </td>
           </tr>
           <?php } ?>
-        </tbody>
+        </body>
       </table>
     </div>
   </div>
 </main>
 
-<footer class="pied-page">
-  <div class="pied-contenu">
-    <div class="pied-marque">
-      <div class="logo-ts">TS</div>
-      <div>
-        <h2>TechSolutions</h2>
-        <p>Votre partenaire informatique</p>
-      </div>
-    </div>
-
-    <div>
-      <h3>Contact</h3>
-      <p>12 rue des Innovateurs, 19100 Brive-la-Gaillarde</p>
-      <p>05 55 88 77 66</p>
-      <p>contact@techsolutions.fr</p>
-    </div>
-
-    <div>
-      <h3>Liens utiles</h3>
-      <a href="index.html">Accueil</a>
-      <a href="index.html#services">Nos services</a>
-      <a href="index.html#entreprise">L'entreprise</a>
-      <a href="index.html#contact">Contact</a>
-    </div>
-  </div>
-
-  <div class="pied-bas">
-    <p>© 2026 TechSolutions. Tous droits réservés.</p>
-  </div>
-
-  <a class="retour-haut" href="#haut" aria-label="Retour en haut">↑</a>
-</footer>
+<?php include "inc/pied.php"; ?>
 
 </body>
 </html>

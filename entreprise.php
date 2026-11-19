@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php
-include "inc/infos.php";
-require "inc/bdd.php";
-$requete = $pdo->query("SELECT prenom, nom, service, role FROM utilisateurs ORDER BY nom");
-$utilisateurs = $requete->fetchAll();
-?>
+<?php
+require_once 'inc/infos.php';
 
+$requete = $bdd->query("SELECT * FROM utilisateurs");
+$utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+?>
 <nav>
     <ul class="menu">
         <li><a class="lien-menu" href="index.php">Accueil</a></li>
@@ -45,13 +44,14 @@ $utilisateurs = $requete->fetchAll();
         </p>
 
         <h2>Notre équipe</h2>
-        <table>
-  <?php foreach ($utilisateurs as $u) { ?>
-  <ul>
-    <li><?php echo $u["prenom"]; ?> <?php echo $u["nom"]; ?>, <?php echo $u["service"]; ?></li>
-  </ul>
-  <?php } ?>
+      <table>
+    <?php foreach ($utilisateurs as $u) { ?>
+        <ul>
+          <li><?php echo $u["prenom"]; ?> <?php echo $u["nom"]; ?>, <?php echo $u["service"]; ?></li>
+        </ul>
+    <?php } ?>
 </table>
+
         <p>
             Notre équipe est composée de professionnels passionnés
             par l'informatique. Nous mettons nos compétences au
