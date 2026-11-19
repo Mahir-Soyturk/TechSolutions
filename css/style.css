@@ -65,3 +65,28 @@ padding: 16px; border: 0; border-radius: 999px; background: #123c63; color: #fff
 .blocs-avantages img { 
 width: 48px; height: auto; 
 }
+.formulaire {
+    background-color: white;
+    border: 1px solid #c5ccd3;
+    padding: 10px 20px;
+    max-width: 400px;
+}
+
+.input {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #c5ccd3;
+}
+
+.bouton {
+    background-color: #e67e22;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+}
+
+.erreur {
+    color: #b03a2e;
+    font-weight: bold;
+}
