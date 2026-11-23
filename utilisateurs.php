@@ -48,6 +48,7 @@ $utilisateurs_admin = $requete_admin->fetchAll();
       <p class="section-surtitre">ADMINISTRATION</p>
       <h2 class="titre-apropos">Gestion des utilisateurs</h2>
       <p>Nombre de comptes : <?php echo count($utilisateurs); ?></p>
+      <p><a href="ajouter.php" class="bouton">Ajouter un utilisateur</a></p>
       <p>dont <?php echo count($utilisateurs_admin); ?> administrateur(s)</p>
       <table>
       <tr>

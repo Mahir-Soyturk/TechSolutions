@@ -94,3 +94,12 @@ width: 48px; height: auto;
   background-color: #b03a2e;
   padding: 5px 12px;
 }
+.slogan {
+  font-size: 1.2em;
+  color: #e45f0d;
+  margin-bottom: 20px;
+}
+.page-ajouter {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
