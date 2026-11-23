@@ -15,7 +15,7 @@ if ($_SESSION["role"] != "admin") {
 include "inc/infos.php";
 require "inc/bdd.php";
 
-$requete = $pdo->query("SELECT prenom, nom, service, role FROM utilisateurs WHERE role != 'admin' ORDER BY nom");
+$requete = $pdo->query("SELECT id, prenom, nom, service, role FROM utilisateurs ORDER BY nom");
 $utilisateurs = $requete->fetchAll();
 $requete_admin = $pdo->query("SELECT prenom FROM utilisateurs WHERE role = 'admin' ORDER BY nom");
 $utilisateurs_admin = $requete_admin->fetchAll();
@@ -98,11 +98,21 @@ $utilisateurs_admin = $requete_admin->fetchAll();
             <td style="padding:12px;">
               <?= htmlspecialchars($utilisateur["role"]) ?>
             </td>
-          </tr>
-          <?php } ?>
-        </body>
-            </table>
-    </div>
+           
+<td style="padding:12px;">
+    <form action="supprimer.php" method="post">
+       <input type="hidden" name="id" value="<?php echo htmlspecialchars($utilisateur['id']); ?>">
+        <button type="submit" class="bouton-supprimer">
+            Supprimer
+        </button>
+    </form>
+</td>
+</tr>
+<?php } ?>
+</tbody>
+</table>
+</div>
+
 
     <p style="text-align:center; margin: 20px;">
       <a href="espace.php">Retour à mon espace</a>
