@@ -1,5 +1,17 @@
 
 <?php
+session_start();
+
+// Page réservée aux personnes connectées...
+if (!isset($_SESSION["id"])) {
+    header("Location: connexion.php");
+    exit;
+}
+// ... et, parmi elles, à l'administrateur
+if ($_SESSION["role"] != "admin") {
+    header("Location: espace.php");
+    exit;
+}
 include "inc/infos.php";
 require "inc/bdd.php";
 
@@ -89,8 +101,13 @@ $utilisateurs_admin = $requete_admin->fetchAll();
           </tr>
           <?php } ?>
         </body>
-      </table>
+            </table>
     </div>
+
+    <p style="text-align:center; margin: 20px;">
+      <a href="espace.php">Retour à mon espace</a>
+    </p>
+
   </div>
 </main>
 
